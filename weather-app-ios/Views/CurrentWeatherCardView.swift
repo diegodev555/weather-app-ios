@@ -9,8 +9,16 @@ import SwiftUI
 
 struct CurrentWeatherCardView: View {
     let weather: CurrentWeather
+    let forecast: [DailyForecast]
     
     var body: some View {
+        NavigationLink(value: weather) {
+            cardContent
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var cardContent: some View {
         VStack(spacing: 16) {
             // City Name
             Text(weather.city)
@@ -68,6 +76,7 @@ struct CurrentWeatherCardView: View {
         .cornerRadius(20)
         .shadow(color: Color.blue.opacity(0.3), radius: 10, x: 0, y: 5)
         .padding(.horizontal)
+        .contentShape(Rectangle())
     }
 }
 
@@ -101,7 +110,12 @@ struct WeatherDetailItem: View {
             feelsLike: 21.0,
             high: 25.0,
             low: 18.0
-        )
+        ),
+        forecast: [
+            DailyForecast(day: "Today", date: "May 16", high: 25, low: 18, condition: .partlyCloudy),
+            DailyForecast(day: "Tomorrow", date: "May 17", high: 23, low: 16, condition: .rainy),
+            DailyForecast(day: "Wednesday", date: "May 18", high: 27, low: 19, condition: .sunny)
+        ]
     )
     .padding()
 }

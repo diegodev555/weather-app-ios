@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Current Weather Model
-struct CurrentWeather: Identifiable, Equatable {
+struct CurrentWeather: Identifiable, Equatable, Hashable {
     let id = UUID()
     let city: String
     let temperature: Double
@@ -18,6 +18,46 @@ struct CurrentWeather: Identifiable, Equatable {
     let feelsLike: Double
     let high: Double
     let low: Double
+    let visibility: Double
+    let uvIndex: Int
+    let sunrise: String
+    let sunset: String
+    
+    init(
+        city: String,
+        temperature: Double,
+        condition: WeatherCondition,
+        humidity: Int,
+        windSpeed: Double,
+        feelsLike: Double,
+        high: Double,
+        low: Double,
+        visibility: Double = 10.0,
+        uvIndex: Int = 5,
+        sunrise: String = "6:30 AM",
+        sunset: String = "7:45 PM"
+    ) {
+        self.city = city
+        self.temperature = temperature
+        self.condition = condition
+        self.humidity = humidity
+        self.windSpeed = windSpeed
+        self.feelsLike = feelsLike
+        self.high = high
+        self.low = low
+        self.visibility = visibility
+        self.uvIndex = uvIndex
+        self.sunrise = sunrise
+        self.sunset = sunset
+    }
+}
+
+// MARK: - Hourly Forecast Model
+struct HourlyForecast: Identifiable, Equatable {
+    let id = UUID()
+    let time: String
+    let temperature: Double
+    let condition: WeatherCondition
 }
 
 // MARK: - Weather Condition Enum
